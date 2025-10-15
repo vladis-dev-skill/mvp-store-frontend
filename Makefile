@@ -15,7 +15,7 @@ build-local: ## Build Next.js application locally
 start-local: ## Start production build locally
 	npm run start
 
-init: network-check build up ## Initialize and start frontend service (first run)
+init: network-create build up ## Initialize and start frontend service (first run)
 	@echo "Frontend service initialized successfully!"
 	@echo "Access at: http://localhost:3000"
 	@echo "Via API Gateway: http://localhost:8090"
