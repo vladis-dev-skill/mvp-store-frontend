@@ -1,0 +1,30 @@
+services:
+  frontend:
+    container_name: mvp-store-frontend
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8090
+      - API_GATEWAY_URL=http://nginx:8090
+      - NEXT_PUBLIC_APP_NAME=MVP Store
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    networks:
+      - mvp_store_network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    labels:
+      - "com.mvpstore.service=frontend"
+      - "com.mvpstore.description=Next.js Frontend Application"
+
+networks:
+  mvp_store_network:
+    external: true
