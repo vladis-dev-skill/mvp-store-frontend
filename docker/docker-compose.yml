@@ -1,3 +1,5 @@
+name: mvp-store-frontend
+
 services:
   frontend:
     container_name: mvp-store-frontend
