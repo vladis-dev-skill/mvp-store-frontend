@@ -39,10 +39,6 @@ exec_bash: ## Access frontend container shell
 network-create: ## Create shared network
 	docker network create mvp_store_network
 
-# ============================================
-# Maintenance
-# ============================================
-
 clean: ## Clean up containers, images, and volumes
 	$(DOCKER_COMPOSE) down -v --rmi all
 	@echo "Cleaned up frontend service"
