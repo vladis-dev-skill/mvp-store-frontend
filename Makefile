@@ -21,8 +21,8 @@ init: build up ## Initialize and start frontend service (first run)
 	@echo "Via API Gateway: http://localhost:8090"
 
 build: ## Build Docker image
-	#$(DOCKER_COMPOSE) build --no-cache
-	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) build --no-cache
+	#$(DOCKER_COMPOSE) build
 
 up: ## Start frontend service
 	$(DOCKER_COMPOSE) up -d
