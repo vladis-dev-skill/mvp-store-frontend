@@ -6,7 +6,7 @@ CONTAINER_NAME = mvp-store-frontend
 install: ## Install Node.js dependencies
 	npm install
 
-dev: ## Start development server (without Docker)
+watch: ## Start development server with hot-reload (without Docker)
 	npm run dev
 
 build-local: ## Build Next.js application locally

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export default function HomePage() {
+export default function PaymentHealthPage() {
   const [response, setResponse] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +14,16 @@ export default function HomePage() {
     setResponse(null);
 
     try {
-      const res = await fetch("/api/payment-health");
+      const res = await fetch("/api/payment/health");
+
+      // Check if response is JSON
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await res.text();
+        setError(`Server returned non-JSON response: ${text.substring(0, 100)}...`);
+        return;
+      }
+
       const data = await res.json();
 
       if (data.error) {
@@ -35,10 +44,10 @@ export default function HomePage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            MVP Store Frontend
+            Payment Service Health Check
           </h1>
           <p className="text-xl text-gray-600">
-            Next.js 14 + Microservices Architecture
+            Test microservices communication
           </p>
         </div>
 
@@ -134,35 +143,27 @@ export default function HomePage() {
           <div className="space-y-2 text-sm text-gray-600">
             <div className="flex items-center">
               <span className="font-medium w-32">Frontend:</span>
-              <span>Next.js 14 (App Router)</span>
+              <span>Next.js 15 (App Router)</span>
             </div>
             <div className="flex items-center">
               <span className="font-medium w-32">API Gateway:</span>
               <span>http://localhost:8090</span>
             </div>
             <div className="flex items-center">
-              <span className="font-medium w-32">Backend:</span>
+              <span className="font-medium w-32">Backend API:</span>
+              <span>http://localhost:8090/api</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-medium w-32">Payment API:</span>
+              <span>http://localhost:8090/api/payment</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-medium w-32">Tech Stack:</span>
               <span>Symfony 7.3 (PHP 8.2+)</span>
             </div>
             <div className="flex items-center">
-              <span className="font-medium w-32">Payment Service:</span>
-              <span>Symfony 7.3 (Microservice)</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-medium w-32">Frontend API:</span>
-              <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">
-                GET /api/payment-health
-              </span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-medium w-32">Backend URL:</span>
-              <span className="font-mono text-xs bg-gray-100 px-2 py-1 rounded">
-                http://localhost:8191/payment-service-health
-              </span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-medium w-32">Pattern:</span>
-              <span className="text-xs">BFF (Backend for Frontend) Proxy</span>
+              <span className="font-medium w-32">Architecture:</span>
+              <span>Microservices with API Gateway</span>
             </div>
           </div>
         </div>

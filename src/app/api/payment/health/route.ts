@@ -2,11 +2,8 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    // Via API Gateway
-    const backendUrl = "http://mvp-store-gateway/api/payment-service-health";
-
-    // Option 3: Docker internal network (direct to backend service - alternative)
-    // const backendUrl = "http://mvp-store-backend:8080/payment-service-health";
+    const apiGatewayUrl = process.env.API_GATEWAY_URL || "http://localhost:8090";
+    const backendUrl = `${apiGatewayUrl}/api/payment-service-health`;
 
     const response = await fetch(backendUrl);
     const data = await response.json();
