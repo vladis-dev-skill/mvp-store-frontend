@@ -14,13 +14,6 @@ export default function HomePage() {
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
               Your one-stop shop for amazing products. Built with modern microservices architecture.
             </p>
-            <div className="flex justify-center">
-              <Link href="/payment/health">
-                <Button className="bg-white !text-gray-900 hover:bg-gray-100 px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all">
-                  Payment Health
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
